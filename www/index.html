@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/monaca-jquery/jquery.js"></script>
+  <script src="components/loader.js"></script>
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+  
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+     $(function(){
+      // Initialization code
+        //x .on('click', function(e) {
+        //x ons.notification.alert('Button is tapped!');
+        $("#imat").html("Elevators");
+        $("#goingto").html("Toilets");
+    });
+    
+    // Page init event
+    document.addEventListener('init', function(event) {
+      var page = event.target;
+
+      if (page.matches('#beacon-page')) {
+        page.querySelector('#beacon-button').onclick = function() {
+          document.querySelector('#navigator').pushPage('directions.html');
+        };
+
+      } else if (page.matches('#directions-page')) {
+
+        page.querySelector('#pop-button').onclick = function() {
+          document.querySelector('#navigator').popPage();
+        };
+
+      }
+    });
+  </script>
+</head>
+<body>
+  <ons-navigator id="navigator" page="beacon.html"></ons-navigator>
+
+  <ons-template id="beacon.html">
+    <ons-page id="beacon-page">
+      <ons-toolbar>
+        <div class="center"><span id="imat">{bleacon}</span></div>
+      </ons-toolbar>
+
+      <div class="content" style="text-align: center">
+        <p>This is the <span id="imat2">{beacon}</span> page.</p>
+        <ons-button id="beacon-button">Directions</ons-button>
+      </div>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="directions.html">
+    <ons-page id="directions-page">
+      <ons-toolbar>
+        <div class="left"><ons-back-button>I'm at</ons-back-button></div>
+        <div class="center">Going to</div>
+      </ons-toolbar>
+
+      <div class="content" style="text-align: center">
+        <p id="goingto">Going to: <span id="dirto2">{dirto2}</span></p>
+        <ons-button id="pop-button">Where am I</ons-button>
+      </div>
+    </ons-page>
+  </ons-template>
+</body>
+</html>
