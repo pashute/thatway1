@@ -1173,7 +1173,7 @@ h4, h5, h6 {
   letter-spacing: 0;
   color: white;
   vertical-align: middle;
-  background-color: rgba(19,19,19,.95);
+  background-color: rgba(24, 103, 194, .81);
   border: 0 solid currentColor;
   border-radius: 3px;
   -webkit-transition: none;
