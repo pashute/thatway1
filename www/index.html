@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-  <script src="www/components/monaca-jquery/jquery.js"></script>
+  <!--<script src="www/components/monaca-jquery/jquery.js"></script>-->
   <script src="components/loader.js"></script>
   <script src="lib/onsenui/js/onsenui.min.js"></script>
   
@@ -15,38 +15,81 @@
   <!--<link rel="stylesheet" href="www/css/iconizr-freepik-png-data.css" type="text/css" media="all">-->
 
   <script>
-     var elevatorHtml = "You are near <i class='icon ion-ios-upload-outline'></i> Elevator hall B";
-     $(function(){
-      // Initialization code
-        //x .on('click', function(e) {
-        //x ons.notification.alert('Button is tapped!');
-        $("#imattxt").html(elevatorHtml);
-        $("#dirto2").text("Toilets");
-        $("#imat").text("Elevators");
-        $("#dirto").text("Toilets");
-        //$("#findout").click(function(){
-            
-        //});
-    });
+    var elevatorHtml = "You are near <i class='icon ion-ios-upload-outline'></i> Elevator hall B<br /><small>pointing south</small>";
+    var gotoInfo = [ { goingto: " Restaurants", ginfo: "Walk 40 steps ahead. Turn left into the south corridor and 30 steps to the restaurants" },
+                     { goingto: "Clothing shops", ginfo: "There are several clothing shops for men women and children along this corridor.<br />"
+                      + "In the real app we will give you a list of shops to choose from. " },
+                     { goingto: "Discount Bank", ginfo: "Discount bank is right behind you. The ATM machine is to your right, 10 steps away." },
+                     { goingto: "Supermarket", ginfo: "There is no supermarket in Big Fashion. Rami Levy is accross the road, "
+                      + "and Shupersol is in the old Big Betchemish mall" },
+                     { goingto: "Toilets", ginfo: "Walk 15 steps ahead then turn right and walk 20 steps. "
+                      + "The first three doors to your right are the rest-room for the disabled, "
+                      + "the men's room and then the women's room." },
+                     { goingto: "Exits", ginfo: "Turn back to exit the elevator hall then turn left 500 meters for the North exit<br />"
+                      + "or turn right and 20 steps to the South exit. <br />"
+                      + "In the real app, you will get a list of exits to choose from." }, 
+                     { goingto: "Emergency exit", ginfo: "Do not panic. the exit is only 50 steps ahead and then turn left." },
+                     { goingto: "Call human", ginfo: "Calling our human helpdesk 24/7. <br />Please note that on Saturday you receive service from GoyShelShabbat.com"}
+                      ];
     // ons-popover ref: https://onsen.io/v1/reference/ons-popover.html#example
-    
+    function getGotoInfo(i){ return gotoInfo[i]; }
     // Page init event
     document.addEventListener('init', function(event) {
       var page = event.target;
 
       if (page.matches('#beacon-page')) {
-          
-        page.querySelector('#beacon-button').onclick = function() {
-          document.querySelector('#navigator').pushPage('directions.html');
+        $('#imattxt').html(elevatorHtml);
+        $('#imat').text('Elevators');
+
+        // bug doesn't allow a 'for' loop. 
+        var btns = $('.gotobtn');
+        btns[0].onclick = function() {
+            document.querySelector('#navigator').pushPage('directions.html', gotoInfo[0]);
+        };
+        btns[1].onclick = function() {
+            document.querySelector('#navigator').pushPage('directions.html', gotoInfo[1]);
+        };
+        btns[2].onclick = function() {
+            document.querySelector('#navigator').pushPage('directions.html', gotoInfo[2]);
+        };
+        btns[3].onclick = function() {
+            document.querySelector('#navigator').pushPage('directions.html', gotoInfo[3]);
+        };
+        btns[4].onclick = function() {
+            document.querySelector('#navigator').pushPage('directions.html', gotoInfo[4]);
+        };
+        btns[5].onclick = function() {
+            document.querySelector('#navigator').pushPage('directions.html', gotoInfo[5]);
+        };
+        btns[6].onclick = function() {
+            document.querySelector('#navigator').pushPage('directions.html', gotoInfo[6]);
+        };
+        btns[7].onclick = function() {
+            document.querySelector('#navigator').pushPage('directions.html', gotoInfo[7]);
+        };
+        btns[8].onclick = function() {
+            document.querySelector('#navigator').pushPage('directions.html', gotoInfo[8]);
         };
 
+        $("#findout").click(function(){
+            ons.createPopover('popover.html').then(function(popover) {
+                popover.show('#findout'); 
+            });
+        });
+        
+
       } else if (page.matches('#directions-page')) {
-        page.querySelector('#pop-button').onclick = function() {
-          document.querySelector('#navigator').popPage();
-        };
+        var nav = document.querySelector('#navigator');
+        $('#dirto').html(nav.topPage.pushedOptions.goingto); //btndirto); // + opts.goingto);
+        $('#dirtoInfo').html(nav.topPage.pushedOptions.ginfo); // btndirinfo);
+        $('#pop-button').click(function() {
+          nav.popPage();
+        });
 
       }
     });
+    
+
   </script>
 </head>
 <body>
@@ -59,25 +102,26 @@
       </ons-toolbar>
 
       <div class="content" style="text-align: center">
-        <p><span id="imattxt">{you are near...}</span></p>
+        <p><img src="css/icons/noamLogo.jpg" /></p>
+        <p><span id="imattxt">{you are near..}</span></p>
         <button id="findout" class="button--large--cta" style="width: 95%; margin: 0 auto;"><i class="zmdi zmdi-info"></i> | Find out what's here</button>
         <hr />
         <br />
         Other things in the building
-        <p><ons-button id="goto1"><i class="icon ion-android-restaurant"></i> | Restaurants</ons-button>
-        <ons-button id="goto2"><i class="icon ion-tshirt-outline"></i> | Clothing</ons-button></p>
-        <p><ons-button id="goto3"><i class="icon ion-cash"></i> | Bank</ons-button>
-        <ons-button id="goto4"><i class="icon ion-ios-cart"></i> | Supermarket</ons-button>
+        <p><ons-button id="goto1" class="gotobtn"><i class="icon ion-android-restaurant"></i> | Restaurants</ons-button>
+        <ons-button id="goto2" class="gotobtn"><i class="icon ion-tshirt-outline"></i> | Clothing</ons-button></p>
+        <p><ons-button id="goto3" class="gotobtn"><i class="icon ion-cash"></i> | Bank</ons-button>
+        <ons-button id="goto4" class="gotobtn"><i class="icon ion-ios-cart"></i> | Supermarket</ons-button>
         </p>
-        <p><ons-button id="goto5"><i class="icon ion-woman"></i><i class="icon ion-man"></i> | Toilets</ons-button>
+        <p><ons-button id="goto5" class="gotobtn"><i class="icon ion-woman"></i><i class="icon ion-man"></i> | Toilets</ons-button>
         <!-- <i class="icon icon-restroom-sign icon-restroom-sign-dims"></i> -->
-        <ons-button id="goto4"><i class="icon ion-android-exit"></i> | Exits</ons-button>
+        <ons-button id="goto6" class="gotobtn"><i class="icon ion-android-exit"></i> | Exits</ons-button>
         </p>
         <hr />
         <br />
         <br />
-        <p><ons-button id="goto3"><i style="background-color: red; color: blue"  class="icon ion-android-exit"> </i> | Emergency <strong>EXIT</strong></ons-button>
-        <ons-button id="goto3"><i class="icon ion-ios-telephone"></i> | Call human</ons-button>
+        <p><ons-button id="goto7" class="gotobtn"><i style="background-color: red; color: blue"  class="icon ion-android-exit"> </i> | Emergency <strong>EXIT</strong></ons-button>
+        <ons-button id="goto8" class="gotobtn"><i class="icon ion-ios-telephone"></i> | Call human</ons-button>
         </p>
       </div>
     </ons-page>
@@ -91,21 +135,24 @@
       </ons-toolbar>
 
       <div class="content" style="text-align: center">
-        <p>Going to: <span id="dirto2">{dirto2}</span></p>
+      <p><img src="css/icons/noamLogo.jpg" /></p>
+        <p>Going to: <strong><span id="dirto">{dirto2}</span></strong></p>
+        <hr />
+        <p><span id="dirtoInfo"></span></p>
         <ons-button id="pop-button">Where am I</ons-button>
       </div>
     </ons-page>
   </ons-template>
   
   <ons-template id="popover.html">
-  <ons-popover cancelable direction="down">
-    <p>You are near <i class='icon ion-ios-upload-outline'></i> Elevator hall B.</p>
-    <hr />
-    <p>Danny, a cantenna or even a second regular beacon will solve this... </p>
-    <p>If you are still inside the main hall, you are facing the south exit near bank discount. <br />
-    the elevator hall is to your right. Inside the hall there are four elevator doors, two on the right and two on the left of the hall.</p>
-  </ons-popover>
-</ons-template>
+    <ons-popover cancelable direction="down">
+        <p>You are near <i class='icon ion-ios-upload-outline'></i> Elevator hall B.</p>
+        <hr />
+        <p>Danny, a cantenna or even a second regular beacon will solve this... </p>
+        <p>If you are still inside the main hall, you are facing the south exit near bank discount. <br />
+        the elevator hall is to your right. Inside the hall there are four elevator doors, two on the right and two on the left of the hall.</p>
+    </ons-popover>
+  </ons-template>
 </body>
 <!--
 <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
