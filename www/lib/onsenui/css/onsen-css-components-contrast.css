@@ -570,7 +570,7 @@ h6 {
 
 .range--material__input::-ms-thumb {
     margin-top: 1px;
-    border: #009688;
+    border: #191919; /*#009688;*/
     height: 12px;
     width: 12px;
     border-radius: 100%;
@@ -1008,12 +1008,12 @@ h6 {
 
 .button--outline {
     background-color: transparent;
-    color: rgba(24, 103, 194, .81)
+    color: rgba(19,19,19,.81)/* changed: 24, 103, 194, .81)*/
 }
 
 .button--outline:active {
     background-color: rgba(203, 221, 241, .9430000000000001);
-    color: rgba(24, 103, 194, .81);
+    color: rgba(19,19,19,.81);/* changed: (24, 103, 194, .81);*/
     opacity: 1
 }
 
@@ -1423,11 +1423,11 @@ h6 {
 
 .button-bar__button {
     background-color: transparent;
-    color: rgba(18, 114, 224, .77);
-    border: 1px solid rgba(18, 114, 224, .77);
-    font-size: 13px;
-    height: 27px;
-    line-height: 27px;
+    color: rgba(19,19,19,.77); /* changed: rgba(18, 114, 224, .77);*/
+    border: 1px solid rgba(19,19,19,.77); /* changed: rgba(18, 114, 224, .77);*/
+    font-size: 16px;
+    height: 30px;/*27px;*/
+    line-height: 30px;/*27px;*/
     -webkit-transition: background-color .2s linear, color .2s linear;
     transition: background-color .2s linear, color .2s linear;
     border-width: 1px 1px 1px 0
@@ -1458,10 +1458,10 @@ h6 {
 .button-bar__button:active,
 :active+.button-bar__button {
     background-color: rgba(205, 225, 248, .931);
-    border: 0 solid rgba(18, 114, 224, .77);
-    border-top: 1px solid rgba(18, 114, 224, .77);
-    border-bottom: 1px solid rgba(18, 114, 224, .77);
-    border-right: 1px solid rgba(18, 114, 224, .77);
+    border: 0 solid rgba(19,19,19,.77);/* changed: 18, 114, 224, .77);*/
+    border-top: 1px solid rgba(19,19,19,.77);/* changed: 18, 114, 224, .77);*/
+    border-bottom: 1px solid rgba(19,19,19,.77);/* changed: 18, 114, 224, .77);*/
+    border-right: 1px solid rgba(19,19,19,.77);/* changed: 18, 114, 224, .77);*/
     font-size: 13px;
     width: 100%;
     -webkit-transition: none;
@@ -1556,8 +1556,8 @@ h6 {
     -moz-osx-font-smoothing: grayscale;
     border-radius: 0;
     background-color: transparent;
-    color: rgba(18, 114, 224, .77);
-    border: 1px solid rgba(18, 114, 224, .77);
+    color: rgba(19,19,19,.77);/* changed: 18, 114, 224, .77);*/
+    border: 1px solid rgba(19,19,19,.77);/* changed: 18, 114, 224, .77);*/
     font-weight: 400;
     padding: 0;
     font-size: 13px;
@@ -1581,10 +1581,10 @@ h6 {
 
 :active+.segment__button {
     background-color: rgba(205, 225, 248, .931);
-    border: 0 solid rgba(18, 114, 224, .77);
-    border-top: 1px solid rgba(18, 114, 224, .77);
-    border-bottom: 1px solid rgba(18, 114, 224, .77);
-    border-right: 1px solid rgba(18, 114, 224, .77);
+    border: 0 solid rgba(19,19,19,.77);/* changed: 18, 114, 224, .77);*/
+    border-top: 1px solid rgba(19,19,19,.77);/* changed: 18, 114, 224, .77);*/
+    border-bottom: 1px solid rgba(19,19,19,.77);/* changed: 18, 114, 224, .77);*/
+    border-right: 1px solid rgba(19,19,19,.77);/* changed: 18, 114, 224, .77);*/
     font-size: 13px;
     width: 100%;
     -webkit-transition: none;
@@ -1592,7 +1592,7 @@ h6 {
 }
 
 :checked+.segment__button {
-    background-color: rgba(18, 114, 224, .77);
+    background-color: rgba(19,19,19,.77);/* changed: 18, 114, 224, .77);*/
     color: #fff;
     -webkit-transition: none;
     transition: none
