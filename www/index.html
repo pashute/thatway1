@@ -1,18 +1,18 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-  <!--<script src="www/components/monaca-jquery/jquery.js"></script>-->
-  <script src="components/loader.js"></script>
-  <script src="lib/onsenui/js/onsenui.min.js"></script>
-  <script src="noamdata.js"></script>
+  <meta charset='utf-8'>
+  <meta name='viewport' content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv='Content-Security-Policy' content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <!--<script src='www/components/monaca-jquery/jquery.js'></script>-->
+  <script src='components/loader.js'></script>
+  <script src='lib/onsenui/js/onsenui.min.js'></script>
+  <script src='noamdata.js'></script>
   
-  <link rel="stylesheet" href="components/loader.css">
-  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
-  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components-contrast.css">
-  <!--<link rel="stylesheet" href="www/css/iconizr-freepik-png-data.css" type="text/css" media="all">-->
+  <link rel='stylesheet' href='components/loader.css'>
+  <link rel='stylesheet' href='lib/onsenui/css/onsenui.css'>
+  <link rel='stylesheet' href='lib/onsenui/css/onsen-css-components-contrast.css'>
+  <!--<link rel='stylesheet' href='www/css/iconizr-freepik-png-data.css' type='text/css' media='all'>-->
 
   <script>
     // ons-popover ref: https://onsen.io/v1/reference/ons-popover.html#example
@@ -25,59 +25,68 @@
         
         $(document).on('init', function(event){
             var page = event.target;
-            //x console.warn("init and read event.target");
+            //x console.warn('init and read event.target');
             
-            if (page.matches("#beacon-page")){
-                //x console.warn("beacon page!");
+            if (page.matches('#beacon-page')){
+                //x console.warn('beacon page!');
     
                 $('#imattxt').html(elevatorHtml);
                 $('#imat').text('Elevators');
-                
-                // bug doesn't allow a 'for' loop. 
-                var btns = $('.gotobtn');
-    
-                btns[0].onclick = function() {
-                    document.querySelector('#navigator').pushPage('directions.html', gotoInfo[0]);
-                };
-                //x console.warn(btns.get(1));
-                $('#'+btns.get(1).id).click(function() {
-                    document.querySelector('#navigator').pushPage('directions.html', gotoInfo[1]);
-                });
-                btns[2].onclick = function() {
-                    document.querySelector('#navigator').pushPage('directions.html', gotoInfo[2]);
-                };
-                btns[3].onclick = function() {
-                    document.querySelector('#navigator').pushPage('directions.html', gotoInfo[3]);
-                };
-                btns[4].onclick = function() {
-                    document.querySelector('#navigator').pushPage('directions.html', gotoInfo[4]);
-                };
-                btns[5].onclick = function() {
-                    document.querySelector('#navigator').pushPage('directions.html', gotoInfo[5]);
-                };
-                btns[6].onclick = function() {
-                    document.querySelector('#navigator').pushPage('directions.html', gotoInfo[6]);
-                };
-                btns[7].onclick = function() {
-                    document.querySelector('#navigator').pushPage('directions.html', gotoInfo[7]);
-                };
-                btns[8].onclick = function() {
-                    document.querySelector('#navigator').pushPage('directions.html', gotoInfo[8]);
-                };
-    
+
                 $("#findout").click(function(){
+                    //console.warn('found out!');
                     ons.createPopover('popover.html').then(function(popover) {
                         popover.show('#findout'); 
                     });
                 });
-        //}); // on createPage beacon
-        
+
+                // bug doesn't allow a 'for' loop. 
+                var btns = $('.gotobtn');
+                /*for (var i = 0; i<6; i++){
+                    $('#'+btns.get(i).id).click(function() {
+                        document.querySelector('#navigator').pushPage('directions.html', gotoInfo[i]);
+                    });
+                }
+                */
+                
+                $('#'+btns.get(0).id).click(function() {
+                    document.querySelector('#navigator').pushPage('directions.html', gotoInfo[0]);
+                });
+                console.warn("btns length:" + btns.length);
+                $('#'+btns.get(1).id).click(function() {
+                    document.querySelector('#navigator').pushPage('directions.html', gotoInfo[1]);
+                });
+                $('#'+btns.get(2).id).click(function() {
+                    document.querySelector('#navigator').pushPage('directions.html', gotoInfo[2]);
+                });
+                $('#'+btns.get(3).id).click(function() {
+                    document.querySelector('#navigator').pushPage('directions.html', gotoInfo[3]);
+                });
+                $('#'+btns.get(4).id).click(function() {
+                    document.querySelector('#navigator').pushPage('directions.html', gotoInfo[4]);
+                });
+                $('#'+btns.get(5).id).click(function() {
+                    document.querySelector('#navigator').pushPage('directions.html', gotoInfo[5]);
+                });
+                $('#'+btns.get(6).id).click(function() {
+                    document.querySelector('#navigator').pushPage('directions.html', gotoInfo[6]);
+                });
+                $('#'+btns.get(7).id).click(function() {
+                    document.querySelector('#navigator').pushPage('directions.html', gotoInfo[7]);
+                });
+                //$('#'+btns.get(8).id).click(function() {
+                //    document.querySelector('#navigator').pushPage('directions.html', gotoInfo[8]);
+                //});
+                
+                
+            // not beacon page                
             } else {
-    
-                //$(document).on('pagecreate','#directions-page',function(event){
+                //if (typeof page == 'undefined') return;
+                //if (typeof page.id == 'undefined') return;
                 if (page.matches('#directions-page')){
-                    console.warn("directions page!");
+                    //console.warn('directions page!');
                     var nav = $('#navigator').get(0); //document.querySelector('#navigator');
+                    //console.warn(nav.topPage.pushedOptions);
                     $('#dirto').html(nav.topPage.pushedOptions.goingto); //btndirto); // + opts.goingto);
                     $('#dirtoInfo').html(nav.topPage.pushedOptions.ginfo); // btndirinfo);
                     $('#pop-button').click(function() {
@@ -92,88 +101,105 @@
   </script>
 </head>
 <body>
-  <ons-navigator id="navigator" page="beacon.html"></ons-navigator>
+  <ons-navigator id='navigator' page='beacon.html'></ons-navigator>
 
-  <ons-template id="beacon.html">
-    <ons-page id="beacon-page">
+  <ons-template id='beacon.html'>
+    <ons-page id='beacon-page'>
       <ons-toolbar>
-        <div class="center"><span id="imat">{bleacon}</span></div>
+        <div class='center'><span id='imat'>{bleacon}</span></div>
       </ons-toolbar>
 
-      <div class="content" style="text-align: center">
-        <img src="css/icons/noamLogo.jpg" />
+      <div class='content' style='text-align: center'>
+        <img src='css/icons/noamLogo.jpg' />
         <hr />
-        <p><span id="imattxt">{you are near..}</span></p>
-        <button id="findout" class="button--large--cta" style="width: 65%; margin: 0 auto;"><i class="zmdi zmdi-info"></i> | Find out what's here</button>
+        <p><span id='imattxt'>{you are near..}</span></p>
+        <button id='findout' class='button--large--cta' style='width: 65%; margin: 0 auto;'>
+          <i class='zmdi zmdi-info'></i> | Find out what's here
+        </button>
         <hr />
         <br />
         <p><strong>Other things in the building:</strong></p>
-        <div class="button-bar" style="width:90%;">
-            <div class="button-bar__item">
-                <button id="goto1" class="gotobtn button-bar__button"><i class="icon ion-android-restaurant"></i> | Restaurants</button></div>
-            <div class="button-bar__item">
-                <button id="goto2" class="gotobtn button-bar__button"><i class="icon ion-tshirt-outline"></i> | Clothing</button></div>
+        <div class='button-bar' style='width:90%;'>
+            <div class='button-bar__item'>
+              <button id='goto1' class='gotobtn button-bar__button'>
+                  <i class='icon ion-android-restaurant'></i> | Restaurants
+              </button>
+            </div>
+            <div class='button-bar__item'>
+                <button id='goto2' class='gotobtn button-bar__button'>
+                  <i class='icon ion-tshirt-outline'></i> | Clothing
+                </button>
+            </div>
         </div>
         <p />
-        <div class="button-bar" style="width:90%;">
-            <div class="button-bar__item">
-                <button id="goto3" class="gotobtn button-bar__button">
-                <i class="icon ion-cash"></i> | Bank</button></div>
-            <div class="button-bar__item">
-                <button id="goto4" class="gotobtn button-bar__button">
-                    <i class="icon ion-ios-cart"></i> | Supermarket</button></div>
+        <div class='button-bar' style='width:90%;'>
+            <div class='button-bar__item'>
+                <button id='goto3' class='gotobtn button-bar__button'>
+                <i class='icon ion-cash'></i> | Bank</button></div>
+            <div class='button-bar__item'>
+                <button id='goto4' class='gotobtn button-bar__button'>
+                    <i class='icon ion-ios-cart'></i> | Supermarket</button></div>
         </div>
         <p />
-        <div class="button-bar" style="width:90%;">
-            <div class="button-bar__item">
-                <button id="goto5" class="gotobtn button-bar__button">
-                <i class="icon ion-woman"></i><i class="icon ion-man"></i> | Toilets</button></div>
-            <div class="button-bar__item">
-                <button id="goto6" class="gotobtn button-bar__button">
-                    <i class="icon ion-android-exit"></i> | Exits</button></div>
+        <div class='button-bar' style='width:90%;'>
+            <div class='button-bar__item'>
+                <button id='goto5' class='gotobtn button-bar__button'>
+                  <i class='icon ion-woman'></i><i class='icon ion-man'></i> | Toilets
+                </button>
+            </div>
+            <div class='button-bar__item'>
+                <button id='goto6' class='gotobtn button-bar__button'>
+                    <i class='icon ion-android-exit'></i> | Exits
+                </button>
+            </div>
         </div>
-        <!-- <i class="icon icon-restroom-sign icon-restroom-sign-dims"></i> -->
+        <!-- <i class='icon icon-restroom-sign icon-restroom-sign-dims'></i> -->
         <p />
         <hr />
         <br />
         <br />
-        <p><ons-button id="goto7" class="gotobtn"><i class="icon ion-android-exit"> </i> | Emergency <strong>EXIT</strong></ons-button>
-        <ons-button id="goto8" class="gotobtn"><i class="icon ion-ios-telephone"></i> | Call human</ons-button>
-        </p>
+        <ons-button id='goto7' class='gotobtn'>
+          <i class='icon ion-android-exit'> </i> | Emergency <strong>EXIT</strong>
+        </ons-button>
+        <ons-button id='goto8' class='gotobtn'>
+          <i class='icon ion-ios-telephone'></i> | Call human
+        </ons-button>
       </div>
     </ons-page>
   </ons-template>
 
-  <ons-template id="directions.html">
-    <ons-page id="directions-page">
+  <ons-template id='directions.html'>
+    <ons-page id='directions-page'>
       <ons-toolbar>
-        <div class="left"><ons-back-button>Location</ons-back-button></div>
-        <div class="center">Directions</div>
+        <div class='left'><ons-back-button>Location</ons-back-button></div>
+        <div class='center'>Directions</div>
       </ons-toolbar>
 
-      <div class="content" style="text-align: center">
-      <p><img src="css/icons/noamLogo.jpg" /></p>
+      <div class='content' style='text-align: center'>
+      <p><img src='css/icons/noamLogo.jpg' /></p>
       <hr />
-        <p>Going to: <strong><span id="dirto">{dirto2}</span></strong></p>
+        <p>Going to: <strong><span id='dirto'>{dirto2}</span></strong></p>
         <hr />
-        <p><span id="dirtoInfo"></span></p>
-        <ons-button id="pop-button">Where am I</ons-button>
+        <p><span id='dirtoInfo'></span></p>
+        <ons-button id='pop-button'>Where am I</ons-button>
       </div>
     </ons-page>
   </ons-template>
   
-  <ons-template id="popover.html">
-    <ons-popover cancelable direction="down">
-        <p>You are near <i class='icon ion-ios-upload-outline'></i> Elevator hall B.</p>
-        <hr />
+  <ons-template id='popover.html'>
+    <ons-popover cancelable direction='down'>
+        <center>You are near <i class='icon ion-ios-upload-outline'></i> Elevator hall B.</center>
+        <p />
         <p>If you are still inside the main hall, you are facing the south exit near bank discount. <br />
         the elevator hall is to your right. Inside the hall there are four elevator doors, two on the right and two on the left of the hall.</p>
-        <p>Danny, a cantenna or even a second regular beacon will solve this and make the instructions much simpler... </p>
+        <p><i>Danny, a cantenna or even a second regular beacon will solve this and make the instructions much simpler... </i></p>
     </ons-popover>
   </ons-template>
 </body>
+
 <!--
-<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+Not used, because they didn't work. Probably a problem in the path.
+<div>Icons made by <a href='http://www.freepik.com' title='Freepik'>Freepik</a> from <a href='https://www.flaticon.com/' title='Flaticon'>www.flaticon.com</a> is licensed by <a href='http://creativecommons.org/licenses/by/3.0/' title='Creative Commons BY 3.0' target='_blank'>CC 3.0 BY</a></div>
 -->
     
 </html>
